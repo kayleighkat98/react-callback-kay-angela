@@ -43,11 +43,24 @@ class App extends Component {
       'm': { id: 'm', title: 'Thirteenth card', content: 'lorem ipsum' },
     },
 }
-handleDeleteItem(){
-  console.log('handle delete item called')
+handleDeleteItem = cardId => { 
+  console.log('handle delete item called');
+  console.log(cardId);
+    let listsPartTwo = [...this.state.lists]
+    listsPartTwo.map(list => {
+      list.cardIds = list.cardIds.filter(idName => 
+        idName !== (cardId)) 
+    })
+
+        let allCardsPartTwo = {...this.state.allCards};
+          console.log(allCardsPartTwo)
+          delete allCardsPartTwo[cardId]
+  this.setState({lists: listsPartTwo, allCards: allCardsPartTwo})
+  //delete cardId from allCardsPartTwo
 }
 handleRandomItem(){
   console.log('new random card made')
+  console.log();
 }
 
   render() {
