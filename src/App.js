@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-//import List from './List'
+import Card from './Card';
+import List from './List';
 import './styles.css';
+console.log({Card});
 
 class App extends Component {
   state = {
@@ -44,7 +46,7 @@ class App extends Component {
 }
 
   render() {
-    const { store } = this.props
+    //const { store } = this.props
     return (
       <main className='App'>
         <header className='App-header'>
@@ -55,7 +57,7 @@ class App extends Component {
             <List
               key={list.id}
               header={list.header}
-              cards={list.cardIds.map(id => store.allCards[id])}
+              cards={list.cardIds.map(id => this.state.allCards[id])}
             />
           ))}
         </div>
@@ -64,33 +66,9 @@ class App extends Component {
   }
 }
 
-function List(props) {
-  return (
-    <section className='List'>
-      <header className='List-header'>
-        <h2>{props.header}</h2>
-      </header>
-      <div className='List-cards'>
-        {props.cards.map((card) =>
-          <Card
-            key={card.id}
-            title={card.title}
-            content={card.content}
-          />
-        )}
-        <button type='button' className='List-add-button'>+ Add Random Card</button>
-      </div>
-    </section>
-  )
-}
+// handleClick = target => {
+//   this.setState(
+//     {Add: target}
+// )}
 
-function Card(props) {
-  return (
-    <div className='Card'>
-      <button type='button'>delete</button>
-      <h3>{props.title}</h3>
-      <p>{props.content}</p>
-    </div>
-  )
-}
 export default App;
