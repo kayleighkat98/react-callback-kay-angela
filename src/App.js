@@ -23,6 +23,7 @@ class App extends Component {
               key={list.id}
               header={list.header}
               cards={list.cardIds.map(id => store.allCards[id])}
+              // onDeleteItem={list.props.onDeleteItem}
             />
           ))}
         </div>
