@@ -5,13 +5,18 @@ export default
 function Card(props) {
   return (
     <div className='Card'>
-      <button type='button'>delete</button>
+      <button
+        onClick={props.onDeleteItem} 
+        type='button'>
+        delete
+      </button>
+
       <h3>{props.title}</h3>
       <p>{props.content}</p>
     </div>
   )
 }
 
- Card.defaultProps={
-  	Card: {}
-  }
+Card.defaultProps = {
+  item: {}
+}

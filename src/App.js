@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Card from './Card';
 import List from './List';
 import './styles.css';
-console.log({Card});
+
 
 class App extends Component {
   state = {
@@ -44,6 +43,12 @@ class App extends Component {
       'm': { id: 'm', title: 'Thirteenth card', content: 'lorem ipsum' },
     },
 }
+handleDeleteItem(){
+  console.log('handle delete item called')
+}
+handleRandomItem(){
+  console.log('new random card made')
+}
 
   render() {
     //const { store } = this.props
@@ -58,6 +63,8 @@ class App extends Component {
               key={list.id}
               header={list.header}
               cards={list.cardIds.map(id => this.state.allCards[id])}
+              onDeleteItem={this.handleDeleteItem}
+              onRandomItem={this.handleRandomItem}
             />
           ))}
         </div>

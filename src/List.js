@@ -15,13 +15,21 @@ function List(props) {
             key={card.id}
             title={card.title}
             content={card.content}
+            onDeleteItem={props.onDeleteItem}
           />
         )}
         <button
-       /* onClick={() => this.handleClick('Add')}*/ type='button' className='List-add-button' >+ Add Random Card</button>
+       /* onClick={() => this.handleClick('Add')}*/ 
+        onClick={props.onRandomItem}
+        type='button' 
+        className='List-add-button' >
+        + Add Random Card
+        </button>
       </div>
     </section>
   )
 }
-
+List.defaultProps = {
+  items: []
+}
 
