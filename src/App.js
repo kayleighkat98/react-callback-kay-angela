@@ -43,25 +43,53 @@ class App extends Component {
       'm': { id: 'm', title: 'Thirteenth card', content: 'lorem ipsum' },
     },
 }
+
 handleDeleteItem = cardId => { 
-  console.log('handle delete item called');
-  console.log(cardId);
-    let listsPartTwo = [...this.state.lists]
-    listsPartTwo.map(list => {
+    let listsCopy = [...this.state.lists]
+    listsCopy.map(list => {
       list.cardIds = list.cardIds.filter(idName => 
         idName !== (cardId)) 
     })
 
-        let allCardsPartTwo = {...this.state.allCards};
-          console.log(allCardsPartTwo)
-          delete allCardsPartTwo[cardId]
-  this.setState({lists: listsPartTwo, allCards: allCardsPartTwo})
-  //delete cardId from allCardsPartTwo
+    let allCardsCopy = {...this.state.allCards};
+    delete allCardsCopy[cardId];
+    this.setState({lists: listsCopy, allCards: allCardsCopy})
+  //delete cardId from allCardsCopy
 }
-handleRandomItem(){
-  console.log('new random card made')
-  console.log();
-}
+
+
+handleRandomItem=(listId)=>{
+
+  const newCard = () => {
+    const id = Math.random().toString(36).substring(2, 4)
+      + Math.random().toString(36).substring(2, 4);
+    return {
+      id,
+      title: `Random Card ${id}`,
+      content: 'lorem ipsum',
+    }
+  }
+
+  const newLists = this.state.lists.map(list => {
+    if (list.cardId === listId) {
+return {
+        ...list,
+        cardIds: [...list.cardIds, newCard.id]
+      };
+    }
+    return list;
+  })
+  // this.setState({lists: listsCopy, allCards: allCardsCopy})
+
+this.setState({
+    lists: newLists,
+    allCards: {
+      ...this.state.allCards,
+      [newCard.id]: newCard
+    }
+})
+}; 
+
 
   render() {
     //const { store } = this.props
@@ -74,6 +102,7 @@ handleRandomItem(){
           {this.state.lists.map(list => (
             <List
               key={list.id}
+              listId={list.id}
               header={list.header}
               cards={list.cardIds.map(id => this.state.allCards[id])}
               onDeleteItem={this.handleDeleteItem}
